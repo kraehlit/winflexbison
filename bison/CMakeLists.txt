@@ -14,8 +14,8 @@ list(REMOVE_ITEM SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/scan-gram.c")
 list(REMOVE_ITEM SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/scan-skel.c")
 
 file(RELATIVE_PATH BISON_DATA_DIR 
-                   ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_INSTALL_BINDIR}
-                   ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_INSTALL_DATAROOTDIR}/winflexbison/data/
+                   ${CMAKE_CURRENT_SOURCE_DIR}/bin/
+                   ${CMAKE_CURRENT_SOURCE_DIR}/share/winflexbison/data/
 )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/config.h.in 
