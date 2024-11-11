@@ -7,16 +7,16 @@
 #define PACKAGE ""
 #define PACKAGE_VERSION "3.8.2"
 #define PACKAGE_NAME "bison"
-#define PKGDATADIR "data"
+#define PKGDATADIR "@BISON_DATA_DIR@"
 #define RENAME_OPEN_FILE_WORKS 1
 
 #define ssize_t ptrdiff_t
 
-extern char* _stpcpy(char *yydest, const char *yysrc);
+extern char *_stpcpy(char *yydest, const char *yysrc);
 
 #include <stdio.h>
-#define fopen(n,m) _fsopen(n,m,_SH_DENYNO)
+#define fopen(n, m) _fsopen(n, m, _SH_DENYNO)
 
-extern int strverscmp(const char* s1, const char* s2);
+extern int strverscmp(const char *s1, const char *s2);
 
-extern int obstack_printf(struct obstack* obs, const char* format, ...);
+extern int obstack_printf(struct obstack *obs, const char *format, ...);

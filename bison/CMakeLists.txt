@@ -13,6 +13,13 @@ list(REMOVE_ITEM SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/scan-code.c")
 list(REMOVE_ITEM SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/scan-gram.c")
 list(REMOVE_ITEM SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/scan-skel.c")
 
+file(RELATIVE_PATH BISON_DATA_DIR 
+                   ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_INSTALL_BINDIR}
+                   ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_INSTALL_DATAROOTDIR}/winflexbison/data/
+)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/config.h.in 
+               ${CMAKE_CURRENT_BINARY_DIR}/config.h )
 
 # Add executable to build.
 add_executable(${PROJECT_NAME} 
@@ -26,8 +33,10 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/data" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/data"
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE "src")
-target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
+target_include_directories(${PROJECT_NAME} 
+                           PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
+                                   "src" 
+                                   ${CMAKE_CURRENT_SOURCE_DIR} )
 
 target_link_libraries(${PROJECT_NAME} winflexbison_common kernel32.lib user32.lib)
 
@@ -40,4 +49,5 @@ file(GLOB liby_src
 add_library(y STATIC ${liby_src})
 
 target_include_directories(y
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/"
+    PRIVATE ${CMAKE_CURRENT_BINARY_DIR} )
