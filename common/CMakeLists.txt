@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 set(PROJECT_NAME winflexbison_common)
 
@@ -37,4 +37,3 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY C_STANDARD 90)
 target_include_directories(${PROJECT_NAME} PUBLIC "misc")
 target_include_directories(${PROJECT_NAME} PUBLIC "m4")
 target_include_directories(${PROJECT_NAME} PUBLIC "m4/lib")
-
